@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -26,5 +28,22 @@ public class StudentEntity {
     private String email;
     @Column(name = "age")
     private Integer age;
+
+    @OneToMany(
+            mappedBy = "student",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<BookEntity> books = new ArrayList<>();
+
+    public void addBook(BookEntity book) {
+        books.add(book);
+        book.setStudent(this);
+    }
+
+    public void removeBook(BookEntity book) {
+        books.remove(book);
+        book.setStudent(null);
+    }
 
 }

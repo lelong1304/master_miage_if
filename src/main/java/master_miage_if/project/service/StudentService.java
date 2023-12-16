@@ -12,4 +12,6 @@ public interface StudentService {
     Student createStudent(Student studentRequest);
 
     Student findStudentById(UUID id) throws Exception;
+
+    Student rentBook(UUID studentId, List<UUID> listBookId) throws Exception;
 }

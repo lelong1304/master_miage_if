@@ -14,6 +14,7 @@ public class StudentMapper {
                 .firstName(entity.getFirstName())
                 .lastName(entity.getLastName())
                 .email(entity.getEmail())
+                .books(BookMapper.toBooks(entity.getBooks()))
                 .build();
     }
 

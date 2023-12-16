@@ -16,6 +16,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Optional;
 import java.util.UUID;
 
+import static java.util.Collections.emptyList;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockitoExtension.class)
@@ -27,14 +28,14 @@ public class ServiceTest {
 
     @BeforeEach
     void setUp() {
-        tested = new StudentServiceImpl(repository);
+        tested = new StudentServiceImpl(repository, null);
     }
 
     @Test
     void should_get_student_by_id() throws Exception {
         // given
         UUID id = UUID.randomUUID();
-        StudentEntity studentEntity = new StudentEntity(id, "David", "Klezt", "david@gmail.com", 23);
+        StudentEntity studentEntity = new StudentEntity(id, "David", "Klezt", "david@gmail.com", 23, emptyList());
         Optional<StudentEntity> optionalStudent = Optional.of(studentEntity);
         Mockito.when(repository.findById(id)).thenReturn(optionalStudent);
         Student expected = StudentMapper.toStudent(studentEntity);
